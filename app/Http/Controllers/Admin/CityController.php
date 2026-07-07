@@ -25,7 +25,7 @@ class CityController extends CrudController
     protected function setupListOperation()
     {
         CRUD::addColumns([
-            ['name' => 'city', 'type' => 'text', 'label' => 'Місто'],
+            ['name' => 'city_name', 'type' => 'text', 'label' => 'Місто'],
         ]);
     }
 
@@ -33,7 +33,7 @@ class CityController extends CrudController
     {
         CRUD::setValidation(\Backpack\CRUD\app\Http\Requests\CrudRequest::class);
         CRUD::addFields([
-            ['name' => 'city', 'type' => 'text', 'label' => 'Місто'],
+            ['name' => 'city_name', 'type' => 'text', 'label' => 'Місто'],
         ]);
     }
 

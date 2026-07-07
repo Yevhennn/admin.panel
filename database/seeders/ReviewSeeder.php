@@ -28,29 +28,6 @@ class ReviewSeeder extends Seeder
             'Катерина Ч.',
         ];
 
-        $cities = [
-            'Київ',
-            'Харків',
-            'Одеса',
-            'Дніпро',
-            'Запоріжжя',
-            'Львів',
-            'Кривий Ріг',
-            'Миколаїв',
-            'Маріуполь',
-            'Вінниця',
-            'Херсон',
-            'Чернівці',
-            'Полтава',
-            'Черкаси',
-            'Суми',
-            'Житомир',
-            'Ужгород',
-            'Івано-Франківськ',
-            'Тернопіль',
-            'Луцьк',
-        ];
-
         $texts = [
             'Гайд дуже детальний і зрозумілий, все по кроках. Рекомендую!',
             'Чудовий матеріал, але хотілося б більше прикладів з реального життя.',
@@ -76,23 +53,22 @@ class ReviewSeeder extends Seeder
 
         $statuses = ['pending', 'approved', 'rejected'];
 
-        $reviews = [];
+        $cities = \App\Models\City::all();
+
         $count = 24;
 
         for ($i = 0; $i < $count; $i++) {
-            $reviews[] = [
+            $city = $cities->random();
+
+            Review::create([
                 'author_name' => $names[array_rand($names)] . ' ' . strtoupper(Str::random(1)) . '.',
-                'city' => $cities[array_rand($cities)],
+                'city_id' => $city->id,
                 'rating' => rand(1, 5),
                 'text' => $texts[array_rand($texts)],
                 'status' => $statuses[array_rand($statuses)],
                 'created_at' => now()->subDays(rand(1, 60)),
                 'updated_at' => now()->subDays(rand(0, 30)),
-            ];
-        }
-
-        foreach ($reviews as $review) {
-            Review::create($review);
+            ]);
         }
     }
 }

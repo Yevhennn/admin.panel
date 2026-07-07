@@ -15,8 +15,10 @@ class City extends Model
     protected $fillable = ['city_name'];
 
    protected $primaryKey = "id";
-
    protected $guarded = ['id'];
 
-
+   public function reviews()
+   {
+       return $this->hasMany(Review::class, 'city_id');
+   }
 }

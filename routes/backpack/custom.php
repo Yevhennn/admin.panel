@@ -11,5 +11,4 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
 ], function () {
     Route::crud('reviews', \App\Http\Controllers\Admin\ReviewCrudController::class);
-    Route::crud('cities', \App\Http\Controllers\Admin\CityController::class);
 });
