@@ -10,11 +10,21 @@ class Review extends Model
 {
     use CrudTrait;
 
-    protected $fillable = ['author_name', 'city', 'rating', 'text', 'status'];
+    protected $fillable = ['author_name', 'city', 'rating', 'text', 'status', 'city_id', 'guide_id'];
 
     protected $casts = [
         'rating' => 'integer',
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
+    public function guide()
+    {
+        return $this->belongsTo(Guide::class, 'guide_id');
+    }
 
     public function scopeApproved(Builder $query): Builder
     {
@@ -29,5 +39,15 @@ class Review extends Model
     public function scopeRejected(Builder $query): Builder
     {
         return $query->where('status', 'rejected');
+    }
+
+    public function scopeByCity(Builder $query, ?int $cityId): Builder
+    {
+        return $query->when($cityId, fn ($q) => $q->where('city_id', $cityId));
+    }
+
+    public function scopeByGuide(Builder $query, ?int $guideId): Builder
+    {
+        return $query->when($guideId, fn ($q) => $q->where('guide_id', $guideId));
     }
 }
