@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\GuideRequest;
 use App\Models\Guide;
 use App\Models\Review;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -40,7 +39,7 @@ class GuideCrudController extends CrudController
                 'options' => [
                     'war' => 'Мобілізація/Армія',
                     'biz' => 'Бізнес/ФОП',
-                    'prop' => 'Маєно/Нерухомість',
+                    'prop' => 'Майно/Нерухомість',
                     'family' => "Сім'я/Спадщина",
                     'finance' => 'Фінанси',
                 ],
@@ -66,6 +65,7 @@ class GuideCrudController extends CrudController
                 'label' => 'Ціна',
                 'type' => 'model_function',
                 'function_name' => 'getPriceHtmlAttribute',
+                'escaped' => false,
             ],
             [
                 'name' => 'status',
@@ -106,7 +106,7 @@ class GuideCrudController extends CrudController
                 'options' => [
                     'war' => 'Мобілізація/Армія',
                     'biz' => 'Бізнес/ФОП',
-                    'prop' => 'Маєно/Нерухомість',
+                    'prop' => 'Майно/Нерухомість',
                     'family' => "Сім'я/Спадщина",
                     'finance' => 'Фінанси',
                 ],

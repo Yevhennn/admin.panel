@@ -32,7 +32,7 @@
               <option value="">Всі категорії</option>
               <option value="war" {{ request('category') === 'war' ? 'selected' : '' }}>Мобілізація/Армія</option>
               <option value="biz" {{ request('category') === 'biz' ? 'selected' : '' }}>Бізнес/ФОП</option>
-              <option value="prop" {{ request('category') === 'prop' ? 'selected' : '' }}>Маєно/Нерухомість</option>
+              <option value="prop" {{ request('category') === 'prop' ? 'selected' : '' }}>Майно/Нерухомість</option>
               <option value="family" {{ request('category') === 'family' ? 'selected' : '' }}>Сім'я/Спадщина</option>
               <option value="finance" {{ request('category') === 'finance' ? 'selected' : '' }}>Фінанси</option>
             </select>
