@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(\Database\Seeders\CitySeeder::class);
         $this->call(\Database\Seeders\ReviewSeeder::class);
+        $this->call(\Database\Seeders\GuideSeeder::class);
     }
 }

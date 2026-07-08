@@ -8,8 +8,7 @@
   ];
 
   $breadcrumbs = $breadcrumbs ?? $defaultBreadcrumbs;
-  $currentCityId = request('city_id');
-  $cities = App\Models\City::orderBy('city_name')->get(['id', 'city_name']);
+  $isGuides = is_a($controller ?? null, \App\Http\Controllers\Admin\GuideCrudController::class, true);
 @endphp
 
 @push('before_styles')
@@ -27,15 +26,32 @@
 
       <div class="city-filter-bar">
         <form method="GET" action="{{ url($crud->route) }}" class="d-flex gap-2 align-items-center">
-          <label for="city_id" class="mb-0 fw-semibold">Місто</label>
-          <select name="city_id" id="city_id" class="form-control" style="max-width: 320px;">
-            <option value="">Усі міста</option>
-            @foreach ($cities as $city)
-              <option value="{{ $city->id }}" {{ (string) $currentCityId === (string) $city->id ? 'selected' : '' }}>
-                {{ $city->city_name }}
-              </option>
-            @endforeach
-          </select>
+          @if($isGuides)
+            <label for="category" class="mb-0 fw-semibold">Категорія</label>
+            <select name="category" id="category" class="form-control" style="max-width: 320px;">
+              <option value="">Всі категорії</option>
+              <option value="war" {{ request('category') === 'war' ? 'selected' : '' }}>Мобілізація/Армія</option>
+              <option value="biz" {{ request('category') === 'biz' ? 'selected' : '' }}>Бізнес/ФОП</option>
+              <option value="prop" {{ request('category') === 'prop' ? 'selected' : '' }}>Маєно/Нерухомість</option>
+              <option value="family" {{ request('category') === 'family' ? 'selected' : '' }}>Сім'я/Спадщина</option>
+              <option value="finance" {{ request('category') === 'finance' ? 'selected' : '' }}>Фінанси</option>
+            </select>
+          @else
+            @php
+              $currentCityId = request('city_id');
+              $cities = App\Models\City::orderBy('city_name')->get(['id', 'city_name']);
+            @endphp
+            <label for="city_id" class="mb-0 fw-semibold">Місто</label>
+            <select name="city_id" id="city_id" class="form-control" style="max-width: 320px;">
+              <option value="">Усі міста</option>
+              @foreach ($cities as $city)
+                <option value="{{ $city->id }}" {{ (string) $currentCityId === (string) $city->id ? 'selected' : '' }}>
+                  {{ $city->city_name }}
+                </option>
+              @endforeach
+            </select>
+          @endif
+
           <button type="submit" class="btn btn-primary">Фільтрувати</button>
           <a href="{{ url($crud->route) }}" class="btn btn-outline-secondary">Скинути</a>
         </form>
